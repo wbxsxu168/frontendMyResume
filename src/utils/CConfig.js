@@ -1,5 +1,5 @@
 class CConfig {
-    //for Prod:  xxxxxxx
+    //for Prod backend url: using your own one with https  
     //FOR LOCAL Debugging URLs
     static baseUrl = "http://localhost:8080/";
     

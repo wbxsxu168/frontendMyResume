@@ -1,2 +1,2 @@
 # frontendMyResume
-frontend of MyResume
+This is the Frontend of MyResumeK8S project.
