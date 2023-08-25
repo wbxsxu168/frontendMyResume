@@ -1,0 +1,27 @@
+{
+    "COMMON": {
+      "error": {
+        "general_one": "Invalid Input or System Error!",
+        "runtime_error": "Runtime error happened!"  
+      }
+    },
+    "DB": {
+        "MDBConnectOK": "MongoDB/AtLas has been connected succesfully!",
+        "MDBCRUDERROR": "MongoDB CRUD failure"
+      },
+    "Identity": {
+        "MaxUserNum": "New sign up users reached license limit! contact support for new license.",
+        "InvalidSignUp": "Sign up user data is invalid!",
+        "CredentialsInvalid": "The input credential does not match our records! please try again.. Note that username/password are case sensitive.",
+        "MissingJWT": "Missing JWT token from HTTP Header!",
+        "MissingRefreshJWT": "Missing JWT token from API request body!",
+        "InvalidJWT": "JWT Token verification failure, access denied!",
+        "user": {
+            "SignUpUser": "User sign up successfully",
+            "LogoutUser": "User logout successfully",
+            "LoginUser": "User sign in successfuly",
+            "E00011": "User not found",
+            "E11000": "Unique constraint violated! User with the same username/email already exists!"
+        }
+    } 
+}
