@@ -1,4 +1,4 @@
-import { reactLocalStorage } from "reactjs-localstorage";
+import secureLocalStorage from "react-secure-storage"; //  reactLocalStorage "reactjs-localstorage"; this has been replaced
 
 const { default: JwtAuthHandler } = require("./JwtAuthHandler");
 const { default: Axios } = require("axios");
@@ -11,12 +11,12 @@ class RestAPIHandler {
         var response = await Axios.post(CConfig.refreshApiUrl, {
           refresh: JwtAuthHandler.getRefreshToken(),
         });
-        reactLocalStorage.set("token", response.data.access);
+        secureLocalStorage.setItem("token", response.data.access);  
       } catch (error) {
         console.log(error);
         //Not Using Valid Token for Refresh then Logout the User
         JwtAuthHandler.logoutUser();
-        window.location = "/";
+        window.location = "/myresume"; // from / to /myresume
       }
     }
   }
@@ -46,6 +46,8 @@ class RestAPIHandler {
     }
     catch (error) {
       console.log(error);
+      JwtAuthHandler.logoutUser();    // add logic for server side revoke/invalidate the token
+      window.location = "/myresume";    
     }
  
   }  

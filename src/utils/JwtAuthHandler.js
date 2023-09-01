@@ -1,6 +1,6 @@
 import axios from "axios";
 import CConfig from "./CConfig";
-import { reactLocalStorage } from "reactjs-localstorage";
+import secureLocalStorage from "react-secure-storage"; // "reactjs-localstorage" replaced;
 
 class JwtAuthHandler {
   static login(username, password, callback) {
@@ -8,8 +8,8 @@ class JwtAuthHandler {
       .post(CConfig.loginUrl, { username: username, password: password })
       .then(function (response) {
         if (response.status === 200) {
-          reactLocalStorage.set("token", response.data.access);
-          reactLocalStorage.set("refresh", response.data.refresh);
+          secureLocalStorage.setItem("token", response.data.access);
+          secureLocalStorage.setItem("refresh", response.data.refresh);
           callback({ error: false, message: "Signin successfully..." });
         }
       })
@@ -31,7 +31,7 @@ class JwtAuthHandler {
   }
 
   static isLoggedIn() {
-    if (reactLocalStorage.get("token") && reactLocalStorage.get("refresh")) {
+    if (secureLocalStorage.getItem("token") && secureLocalStorage.getItem("refresh")) { 
       return true;
     } else {
       return false;
@@ -39,20 +39,21 @@ class JwtAuthHandler {
   }
 
   static getLoginToken() {
-    return reactLocalStorage.get("token");
+    return secureLocalStorage.getItem("token");
   }
 
   static getRefreshToken() {
-    return reactLocalStorage.get("refresh");
+    return secureLocalStorage.getItem("refresh");
   }
 
   static logoutUser() {
   //  console.log('logout user .. ');
-    reactLocalStorage.remove("token");
-    reactLocalStorage.remove("refresh");
+    secureLocalStorage.removeItem("token");
+    secureLocalStorage.removeItem("refresh");
   }
 
   // this part logic refer from github hackstarsj 
+  // need enhancing as it can not handle server side revoke token cases..
   static checkTokenExpiry() {
     var expire = false;
     var token = this.getLoginToken();
